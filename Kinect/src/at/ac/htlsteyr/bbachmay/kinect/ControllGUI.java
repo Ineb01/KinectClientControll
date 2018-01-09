@@ -1,3 +1,4 @@
+package at.ac.htlsteyr.bbachmay.kinect;
 import java.awt.*;
 import javax.swing.*;
 

@@ -1,3 +1,4 @@
+package at.ac.htlsteyr.bbachmay.kinect;
 import edu.ufl.digitalworlds.j4k.J4KSDK;
 import edu.ufl.digitalworlds.j4k.Skeleton;
 
@@ -5,7 +6,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.Math;
-import java.net.UnknownHostException;
+
+import at.restental.andreas.networking.RPIClient;
 
 public class KinectMain extends J4KSDK {
 	
