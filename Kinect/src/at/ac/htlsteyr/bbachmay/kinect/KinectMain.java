@@ -13,6 +13,7 @@ public class KinectMain extends J4KSDK {
 
 	static RPIClient sock;
 	static ControllGUI gui;
+	int indicator = 1;
 
 	@Override
 	public void onSkeletonFrameEvent(boolean[] skeleton_tracked, float[] joint_position, float[] joint_orientation,
@@ -64,17 +65,29 @@ public class KinectMain extends J4KSDK {
 		if (gui.frozen() == false) {
 			sock.out.println(angleLeft.intValue() + " " + angleRight.intValue());
 			sock.out.flush();
+		} else {
+			sock.out.println(90 + " " + 90);
+			sock.out.flush();
 		}
 		
 		gui.setValueLeft(angleLeft.intValue());
 		gui.setValueRight(angleRight.intValue());
 		
-
+		indicator = 1;
+		
 	}
 
 	@Override
 	public void onColorFrameEvent(byte[] color_frame) {
-
+		
+		if(indicator == 1) {
+			indicator = 0;
+			gui.setSkeletonIndicator(true);
+		} else {
+			gui.setSkeletonIndicator(false);
+		}
+		
+		
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import javax.swing.border.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 public class ControllGUI extends JFrame implements ActionListener {
@@ -15,6 +17,7 @@ public class ControllGUI extends JFrame implements ActionListener {
 	private JButton exitprog_btn;
 	private JProgressBar bar_left;
 	private JProgressBar bar_right;
+	private JLabel skeleton_indicator;
 	private boolean frozen;
 	private boolean exit;
 
@@ -25,7 +28,7 @@ public class ControllGUI extends JFrame implements ActionListener {
 		frozen = false;
 		exit = false;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 480, 80);
+		setBounds(100, 100, 520, 80);
 		setTitle("Robo-Controll");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,6 +53,13 @@ public class ControllGUI extends JFrame implements ActionListener {
 		exitprog_btn.addActionListener(this);
 		exitprog_btn.setActionCommand("exit");
 		contentPane.add(exitprog_btn);
+		
+		skeleton_indicator = new JLabel();
+		skeleton_indicator.setPreferredSize(new Dimension(16, 16));
+		skeleton_indicator.setOpaque(true);
+		skeleton_indicator.setBackground(Color.BLACK);
+		contentPane.add(skeleton_indicator);
+		
 
 		this.setVisible(true);
 	}
@@ -76,5 +86,13 @@ public class ControllGUI extends JFrame implements ActionListener {
 
 	public boolean is_exit() {
 		return exit;
+	}
+	
+	public void setSkeletonIndicator(boolean set) {
+		if(set == true) {
+			skeleton_indicator.setBackground(Color.GREEN);
+		} else {
+			skeleton_indicator.setBackground(Color.RED);
+		}
 	}
 }
