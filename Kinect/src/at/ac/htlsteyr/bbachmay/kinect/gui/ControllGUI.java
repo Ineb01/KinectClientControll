@@ -31,17 +31,21 @@ public class ControllGUI extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
 		freeze_btn = new JButton("Freeze");
 		freeze_btn.addActionListener(this);
 		freeze_btn.setFont(new Font("Tahoma", Font.BOLD, 11));
 		freeze_btn.setActionCommand("freeze");
 		contentPane.add(freeze_btn);
+		
 		bar_right = new JProgressBar(-360, 360);
 		bar_right.setStringPainted(true);
 		contentPane.add(bar_right);
+		
 		bar_left = new JProgressBar(-360, 360);
 		bar_left.setStringPainted(true);
 		contentPane.add(bar_left);
+		
 		exitprog_btn = new JButton("Exit");
 		exitprog_btn.addActionListener(this);
 		exitprog_btn.setActionCommand("exit");
@@ -57,6 +61,14 @@ public class ControllGUI extends JFrame implements ActionListener {
 		if (e.getActionCommand().equals("exit"))
 			exit = true;
 	}
+
+	public void setValueLeft(int value) {
+		bar_left.setValue(value);
+	}
+	public void setValueRight(int value) {
+		bar_right.setValue(value);
+	}
+	
 
 	public boolean frozen() {
 		return frozen;

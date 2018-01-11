@@ -3,11 +3,7 @@ package at.ac.htlsteyr.bbachmay.kinect;
 import edu.ufl.digitalworlds.j4k.J4KSDK;
 import edu.ufl.digitalworlds.j4k.Skeleton;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.Math;
 
 import at.ac.htlsteyr.bbachmay.kinect.gui.ControllGUI;
@@ -16,7 +12,7 @@ import at.restental.andreas.networking.RPIClient;
 public class KinectMain extends J4KSDK {
 
 	static RPIClient sock;
-	static ControllGUI gui = new ControllGUI();
+	static ControllGUI gui;
 
 	@Override
 	public void onSkeletonFrameEvent(boolean[] skeleton_tracked, float[] joint_position, float[] joint_orientation,
@@ -69,6 +65,10 @@ public class KinectMain extends J4KSDK {
 			sock.out.println(angleLeft.intValue() + " " + angleRight.intValue());
 			sock.out.flush();
 		}
+		
+		gui.setValueLeft(angleLeft.intValue());
+		gui.setValueRight(angleRight.intValue());
+		
 
 	}
 
@@ -85,6 +85,7 @@ public class KinectMain extends J4KSDK {
 	public static void main(String[] args) {
 
 		try {
+			gui = new ControllGUI();
 			sock = new RPIClient(3344, "192.168.43.105");
 		} catch (Exception e1) {
 			e1.printStackTrace();
