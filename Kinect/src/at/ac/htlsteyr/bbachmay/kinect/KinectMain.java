@@ -69,25 +69,24 @@ public class KinectMain extends J4KSDK {
 			sock.out.println(90 + " " + 90);
 			sock.out.flush();
 		}
-		
+
 		gui.setValueLeft(angleLeft.intValue());
 		gui.setValueRight(angleRight.intValue());
-		
+
 		indicator = true;
-		
+
 	}
 
 	@Override
 	public void onColorFrameEvent(byte[] color_frame) {
-		
-		if(indicator) {
+
+		if (indicator) {
 			indicator = false;
 			gui.setSkeletonIndicator(true);
 		} else {
 			gui.setSkeletonIndicator(false);
 		}
-		
-		
+
 	}
 
 	@Override
@@ -115,6 +114,12 @@ public class KinectMain extends J4KSDK {
 		kinect.start(J4KSDK.COLOR | J4KSDK.DEPTH | J4KSDK.SKELETON);
 
 		while (gui.is_exit()) {
+			try {
+				gui.updateVisuals(sock.in.readLine());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		sock.out.println("end");

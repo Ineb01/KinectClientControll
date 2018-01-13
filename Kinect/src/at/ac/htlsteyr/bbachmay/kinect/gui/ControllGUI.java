@@ -121,6 +121,32 @@ public class ControllGUI extends JFrame implements ActionListener {
 	public boolean is_exit() {
 		return exit;
 	}
+	
+	public void updateVisuals(String s) {
+		if(s.contains("left")) {
+			if(s.contains("fwd")) {
+				motor0.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_fwd.png")));
+				motor1.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_fwd.png")));
+			}else if(s.contains("rev")) {
+				motor0.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_rev.png")));
+				motor1.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_rev.png")));
+			}else if(s.contains("off")) {
+				motor0.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_stop.png")));
+				motor1.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_stop.png")));
+			}
+		}else if(s.contains("right")) {
+			if(s.contains("fwd")) {
+				motor2.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_fwd_mirror.png")));
+				motor3.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_fwd_mirror.png")));
+			}else if(s.contains("rev")) {
+				motor2.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_rev_mirror.png")));
+				motor3.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_rev_mirror.png")));
+			}else if(s.contains("off")) {
+				motor2.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_stop_mirror.png")));
+				motor3.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_stop_mirror.png")));
+			}
+		}
+	}
 
 	public void setSkeletonIndicator(boolean set) {
 		if (set == true) {
