@@ -62,11 +62,9 @@ public class ControllGUI extends JFrame implements ActionListener {
 		exitprog_btn.setActionCommand("exit");
 		contentPane.add(exitprog_btn);
 
-		skeleton_indicator = new JLabel();
+		skeleton_indicator = new JLabel("");
+		skeleton_indicator.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/conection_unknown.png")));
 		skeleton_indicator.setBounds(601, 427, 23, 23);
-		skeleton_indicator.setPreferredSize(new Dimension(16, 16));
-		skeleton_indicator.setOpaque(true);
-		skeleton_indicator.setBackground(Color.BLACK);
 		contentPane.add(skeleton_indicator);
 		
 		motor0 = new JLabel("");
@@ -150,9 +148,9 @@ public class ControllGUI extends JFrame implements ActionListener {
 
 	public void setSkeletonIndicator(boolean set) {
 		if (set == true) {
-			skeleton_indicator.setBackground(Color.GREEN);
+			skeleton_indicator.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/conection_good.png")));
 		} else {
-			skeleton_indicator.setBackground(Color.RED);
+			skeleton_indicator.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/conection_bad.png")));
 		}
 	}
 }
