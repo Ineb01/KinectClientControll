@@ -98,7 +98,7 @@ public class KinectMain extends J4KSDK {
 
 		try {
 			gui = new ControllGUI();
-			sock = new RPIClient(3344, "192.168.43.105");
+			sock = new RPIClient(3344, args[0]);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			return;
