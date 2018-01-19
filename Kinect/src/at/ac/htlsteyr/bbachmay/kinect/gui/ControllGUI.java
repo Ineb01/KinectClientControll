@@ -97,7 +97,7 @@ public class ControllGUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("freeze"))
-			frozen = true;
+			frozen = !frozen;
 		if (e.getActionCommand().equals("exit"))
 			exit = true;
 	}

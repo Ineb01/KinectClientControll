@@ -85,6 +85,8 @@ public class KinectMain extends J4KSDK {
 			gui.setSkeletonIndicator(true);
 		} else {
 			gui.setSkeletonIndicator(false);
+			sock.out.println(90 + " " + 90);
+			sock.out.flush();
 		}
 
 	}
@@ -113,11 +115,10 @@ public class KinectMain extends J4KSDK {
 		KinectMain kinect = new KinectMain();
 		kinect.start(J4KSDK.COLOR | J4KSDK.DEPTH | J4KSDK.SKELETON);
 
-		while (gui.is_exit()) {
+		while (!gui.is_exit()) {
 			try {
 				gui.updateVisuals(sock.in.readLine());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -131,6 +132,7 @@ public class KinectMain extends J4KSDK {
 			e.printStackTrace();
 		}
 		kinect.stop();
+		gui.dispose();
 
 		return;
 	}
