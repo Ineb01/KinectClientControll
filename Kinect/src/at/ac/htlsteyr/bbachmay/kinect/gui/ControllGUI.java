@@ -111,17 +111,17 @@ public class ControllGUI extends JFrame implements ActionListener {
 		BaseplateWrapper = new JPanel();
 		DisplayWrapper.add(BaseplateWrapper);
 		BaseplateWrapper.setLayout(null);
+		
+				warning = new JLabel("");
+				warning.setBounds(0, 0, 200, 200);
+				BaseplateWrapper.add(warning);
+				warning.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/dist.png")));
+				warning.setVisible(false);
 
 		Basaeplate = new JLabel("");
 		Basaeplate.setBounds(0, 0, 210, 390);
 		BaseplateWrapper.add(Basaeplate);
 		Basaeplate.setIcon(baseplate_icon);
-
-		warning = new JLabel("");
-		warning.setBounds(0, 0, 200, 200);
-		BaseplateWrapper.add(warning);
-		warning.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/dist.png")));
-		warning.setVisible(false);
 
 		motor3 = new JLabel("");
 		motor3.setIcon(motor_stp_m);
