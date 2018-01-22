@@ -1,17 +1,16 @@
 package at.ac.htlsteyr.bbachmay.kinect.gui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.Font;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.RenderingHints;
 
 public class ControllGUI extends JFrame implements ActionListener {
 
@@ -28,37 +27,43 @@ public class ControllGUI extends JFrame implements ActionListener {
 	private JLabel motor3;
 	private boolean frozen;
 	private boolean exit;
-	private JLabel Basaeplate;
+	private JLabel Baseplate;
 	private JLabel warning;
 	private JPanel ButtonWrapper;
 	private JPanel BaseplateWrapper;
 	private MotorWrapper left;
 	private MotorWrapper right;
 
-	private ImageIcon motor_fwd;
-	private ImageIcon motor_rev;
-	private ImageIcon motor_stp;
-	private ImageIcon motor_fwd_m;
-	private ImageIcon motor_rev_m;
-	private ImageIcon motor_stp_m;
-	private ImageIcon baseplate_icon;
+	private Image motor_fwd;
+	private Image motor_rev;
+	private Image motor_stp;
+	private Image motor_fwd_m;
+	private Image motor_rev_m;
+	private Image motor_stp_m;
+	private Image baseplate_icon;
 
 	/**
 	 * Create the frame.
 	 */
 	public ControllGUI() {
-		motor_fwd = new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_fwd.png"));
-		motor_rev = new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_rev.png"));
-		motor_stp = new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_stop.png"));
-		motor_fwd_m = new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_fwd_mirror.png"));
-		motor_rev_m = new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_rev_mirror.png"));
-		motor_stp_m = new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_stop_mirror.png"));
-		baseplate_icon = new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/base.png"));
-
+		try {
+			motor_fwd = ImageIO.read(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_fwd.png"));
+			motor_rev = ImageIO.read(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_rev.png"));
+			motor_stp = ImageIO.read(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_stop.png"));
+			motor_fwd_m = ImageIO
+					.read(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_fwd_mirror.png"));
+			motor_rev_m = ImageIO
+					.read(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_rev_mirror.png"));
+			motor_stp_m = ImageIO
+					.read(ControllGUI.class.getResource("/at/restental/andreas/icons/motor_stop_mirror.png"));
+			baseplate_icon = ImageIO.read(ControllGUI.class.getResource("/at/restental/andreas/icons/base.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		frozen = false;
 		exit = false;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 500);
+		setBounds(100, 100, 733, 524);
 		setTitle("Robo-Controll");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -100,10 +105,10 @@ public class ControllGUI extends JFrame implements ActionListener {
 		DisplayWrapper.setLayout(new GridLayout(0, 3, 0, 0));
 
 		motor0 = new JLabel("");
-		motor0.setIcon(motor_stp);
+		motor0.setIcon(new ImageIcon(motor_stp));
 
 		motor1 = new JLabel("");
-		motor1.setIcon(motor_stp);
+		motor1.setIcon(new ImageIcon(motor_stp));
 
 		left = new MotorWrapper(BorderLayout.WEST, motor0, motor1);
 		DisplayWrapper.add(left);
@@ -111,23 +116,24 @@ public class ControllGUI extends JFrame implements ActionListener {
 		BaseplateWrapper = new JPanel();
 		DisplayWrapper.add(BaseplateWrapper);
 		BaseplateWrapper.setLayout(null);
-		
-				warning = new JLabel("");
-				warning.setBounds(0, 0, 200, 200);
-				BaseplateWrapper.add(warning);
-				warning.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/dist.png")));
-				warning.setVisible(false);
 
-		Basaeplate = new JLabel("");
-		Basaeplate.setBounds(0, 0, 210, 390);
-		BaseplateWrapper.add(Basaeplate);
-		Basaeplate.setIcon(baseplate_icon);
+		warning = new JLabel("");
+		warning.setBounds(0, 0, 200, 200);
+		BaseplateWrapper.add(warning);
+		warning.setIcon(new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/dist.png")));
+		warning.setVisible(false);
+
+		Baseplate = new JLabel("");
+		Baseplate.setHorizontalAlignment(SwingConstants.CENTER);
+		Baseplate.setBounds(0, 0, 210, 390);
+		BaseplateWrapper.add(Baseplate);
+		Baseplate.setIcon(new ImageIcon(baseplate_icon));
 
 		motor3 = new JLabel("");
-		motor3.setIcon(motor_stp_m);
+		motor3.setIcon(new ImageIcon(motor_stp_m));
 
 		motor2 = new JLabel("");
-		motor2.setIcon(motor_stp_m);
+		motor2.setIcon(new ImageIcon(motor_stp_m));
 
 		right = new MotorWrapper(BorderLayout.EAST, motor2, motor3);
 		DisplayWrapper.add(right);
@@ -156,8 +162,11 @@ public class ControllGUI extends JFrame implements ActionListener {
 	}
 
 	public boolean is_exit() {
-		baseplate_icon.setImage(getScaledImage(baseplate_icon.getImage(), BaseplateWrapper.getSize().width,
-				BaseplateWrapper.getSize().height));
+		Baseplate.setIcon(new ImageIcon(baseplate_icon.getScaledInstance(BaseplateWrapper.getWidth(),
+				BaseplateWrapper.getHeight(), Image.SCALE_SMOOTH)));
+		Baseplate.setBounds(0, 0, BaseplateWrapper.getWidth(), BaseplateWrapper.getHeight());
+		
+		
 		
 		return exit;
 	}
@@ -165,25 +174,25 @@ public class ControllGUI extends JFrame implements ActionListener {
 	public void updateVisuals(String s) {
 		if (s.contains("left")) {
 			if (s.contains("fwd")) {
-				motor0.setIcon(motor_fwd);
-				motor1.setIcon(motor_fwd);
+				motor0.setIcon(new ImageIcon(motor_fwd));
+				motor1.setIcon(new ImageIcon(motor_fwd));
 			} else if (s.contains("rev")) {
-				motor0.setIcon(motor_rev);
-				motor1.setIcon(motor_rev);
+				motor0.setIcon(new ImageIcon(motor_rev));
+				motor1.setIcon(new ImageIcon(motor_rev));
 			} else if (s.contains("off")) {
-				motor0.setIcon(motor_stp);
-				motor1.setIcon(motor_stp);
+				motor0.setIcon(new ImageIcon(motor_stp));
+				motor1.setIcon(new ImageIcon(motor_stp));
 			}
 		} else if (s.contains("right")) {
 			if (s.contains("fwd")) {
-				motor2.setIcon(motor_fwd_m);
-				motor3.setIcon(motor_fwd_m);
+				motor2.setIcon(new ImageIcon(motor_fwd_m));
+				motor3.setIcon(new ImageIcon(motor_fwd_m));
 			} else if (s.contains("rev")) {
-				motor2.setIcon(motor_rev_m);
-				motor3.setIcon(motor_rev_m);
+				motor2.setIcon(new ImageIcon(motor_rev_m));
+				motor3.setIcon(new ImageIcon(motor_rev_m));
 			} else if (s.contains("off")) {
-				motor2.setIcon(motor_stp_m);
-				motor3.setIcon(motor_stp_m);
+				motor2.setIcon(new ImageIcon(motor_stp_m));
+				motor3.setIcon(new ImageIcon(motor_stp_m));
 			}
 		} else if (s.contains("dist")) {
 			if (s.contains("distend")) {
@@ -202,16 +211,5 @@ public class ControllGUI extends JFrame implements ActionListener {
 			skeleton_indicator.setIcon(
 					new ImageIcon(ControllGUI.class.getResource("/at/restental/andreas/icons/conection_bad.png")));
 		}
-	}
-
-	private Image getScaledImage(Image srcImg, int w, int h) {
-		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2 = resizedImg.createGraphics();
-
-		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2.drawImage(srcImg, 0, 0, w, h, null);
-		g2.dispose();
-
-		return resizedImg;
 	}
 }
