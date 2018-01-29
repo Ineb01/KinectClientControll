@@ -165,9 +165,7 @@ public class ControllGUI extends JFrame implements ActionListener {
 		Baseplate.setIcon(new ImageIcon(baseplate_icon.getScaledInstance(BaseplateWrapper.getWidth(),
 				BaseplateWrapper.getHeight(), Image.SCALE_SMOOTH)));
 		Baseplate.setBounds(0, 0, BaseplateWrapper.getWidth(), BaseplateWrapper.getHeight());
-		
-		
-		
+
 		return exit;
 	}
 
